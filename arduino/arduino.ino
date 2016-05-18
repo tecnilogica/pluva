@@ -12,6 +12,13 @@ const char WiFiPSK[] = "rainmaker3000";
 String clientMac = "";
 uint8_t mac[WL_MAC_ADDR_LENGTH];
 
+// Datos de conexión con el servidor
+const char host[] = "pluva.tecnilogica.com";
+const int port = 80;
+
+// Tag donde vienen los datos del tiempo
+const String code = "</forecast>";
+
 // Tiempo en ms entre cada peticion
 const unsigned long sleepTime = 60000; 
 
@@ -47,12 +54,54 @@ void setup() {
   // Inicializamos la aplicación
   initHardware();
   connectWiFi();
+
+  // Prueba todos los colores tras inicializar el hardware
+  cycleColors();
 }
 
 // El código dentro de loop() se ejecuta en bucle durante la duració
 void loop() {
-  // Prueba todos los colores 
-  cycleColors();
+  // Crea una instance de WiFiClient
+  WiFiClient client;
+
+  if (!client.connect(host, port)) {
+    Serial.println("Ha fallado la conexión al host");
+    return;
+  }
+
+  // Creamos la URL a la que haremos la petición de datos
+  String url = "/forecast.php?u=" + clientMac;
+  
+  Serial.print("Haciendo una petición a URL: ");
+  Serial.println(url);
+
+  // Enviamos una petición HTTP GET a la URL
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" + 
+               "Connection: close\r\n\r\n");
+
+  delay(500);
+
+  // Leemos la respuesta del servidor y la ponemos por el puerto de serie
+  while(client.available()){
+    String line = client.readStringUntil('\r');
+
+    // Comprobamos si la líne actual termina con el tag </forecast> 
+    if (line.endsWith(code)) {
+      // Sacamos el valor que viene entre <code></code>
+      String setColor = line.substring(code.length(), line.indexOf(code));
+
+      // Lo devolvemos vía consola
+      Serial.print("Hoy me siento: ");
+      Serial.println(setColor);
+    
+      // Y ponemos el pixel del color que corresponda
+      setPixelToWeather(setColor.toInt());
+    }
+  }
+
+  // Un delay de 10 segundos antes de hacer una nueva petición
+  delay(sleepTime);
 }
 
 // Inicializa el hardware 
@@ -103,6 +152,7 @@ void connectWiFi() {
     clientMac += String(mac[i], 16);
   }
   
+  // Sacamos por serial los valores de IP y MAC
   Serial.println("¡Conectado a la red con éxito!");  
   Serial.print("Dirección IP: ");
   Serial.println(WiFi.localIP());
@@ -110,9 +160,38 @@ void connectWiFi() {
   Serial.print("Dirección MAC: ");
   Serial.println(clientMac);
 
-
   // Dejamos el LED encendido para indicar que estamos conectados
   digitalWrite(LED_PIN, LOW);
+}
+
+// Cambia el color del pixel dependiendo del clima recibido
+void setPixelToWeather(int weather) {
+  switch (weather) {
+    case 1:
+      // Caluroso
+      strip.setPixelColor(0, rojo);
+      break;
+    case 2:
+      // Soleado o agradable
+      strip.setPixelColor(0, verde);
+      break;
+    case 3:
+      // Frío
+      strip.setPixelColor(0, azul);
+      break;
+    case 4:
+      // Lluvioso
+      strip.setPixelColor(0, gris);
+      break;
+    case 5: 
+      // Nublado
+      strip.setPixelColor(0, blanco);
+      break;
+    default:
+      strip.setPixelColor(0, morado);
+  }
+  
+  strip.show();
 }
 
 // Cambia el pixel entre todos los colores disponibles
@@ -135,15 +214,15 @@ void cycleColors() {
   strip.show();
   delay(delayTime);
 
-  strip.setPixelColor(0, azul);
-  strip.show();
-  delay(delayTime);
-
   strip.setPixelColor(0, gris);
   strip.show();
   delay(delayTime);
 
   strip.setPixelColor(0, morado);
+  strip.show();
+  delay(delayTime);
+
+  strip.setPixelColor(0, azul);
   strip.show();
   delay(delayTime);
 }
