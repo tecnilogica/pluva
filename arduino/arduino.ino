@@ -2,12 +2,18 @@
 // Librería Adafruit NeoPiel para controlar el LED
 // Liberría WiFi del ESP8266 para tener acceso a la red
 #include <Adafruit_NeoPixel.h>
+#include <ESP8266WiFi.h>
+
+// Configuración de la conexión
+const char WiFiSSID[] = "Pluva";
+const char WiFiPSK[] = "rainmaker3000";
 
 // Tiempo en ms entre cada peticion
 const unsigned long sleepTime = 60000; 
 
 // Declaramos los pines que vamos a utilizar
 const int PIXEL_PIN = 2;
+const int LED_PIN = 5;
 
 // Configuración la librería de Neopixel
 //
@@ -34,7 +40,9 @@ const uint32_t morado = strip.Color(0xC3, 0x90, 0xD4);
 // setup() se ejecuta una única vez, se utiliza para realizar la configuración 
 // inicial de la aplicación
 void setup() {
+  // Inicializamos la aplicación
   initHardware();
+  connectWiFi();
 }
 
 // El código dentro de loop() se ejecuta en bucle durante la duració
@@ -43,14 +51,54 @@ void loop() {
   cycleColors();
 }
 
+// Inicializa el hardware 
 void initHardware() {
   // Abrimos una conexión al puerto de serie
   Serial.begin(9600);
+
+  // Configuramos el PIN del LED como salida y lo apagamos
+  pinMode(LED_PIN, OUTPUT); 
+  digitalWrite(LED_PIN, HIGH); 
   
   // Inicializar la tira y dejar el píxel apagado
   strip.begin();
   strip.setBrightness(255);
   strip.show();
+}
+
+// Conecta con la red WiFi
+void connectWiFi() {
+  byte ledStatus = LOW;
+  
+  Serial.println("Conectando con: " + String(WiFiSSID));
+  
+  // El ESP8266 soporta varios modos WiFi, usamos WIFI_STA
+  WiFi.mode(WIFI_STA);
+
+  // WiFI.begin([ssid], [passkey]) inicializa una conexión WiFi
+  // al [ssid] dado, usando [passkey] como clave WPA, WPA2,
+  // o WEP.
+  WiFi.begin(WiFiSSID, WiFiPSK);
+
+  // Usando WiFi.status() podemos saber si estamos conectados a la 
+  // red o no
+  while (WiFi.status() != WL_CONNECTED) {
+    // Hacemos parpadear el LED integrado mientras abrimos la conexión
+    digitalWrite(LED_PIN, ledStatus);
+    ledStatus = (ledStatus == HIGH) ? LOW : HIGH;
+
+    // Al no tener multihilo necesitamos tener un delay en cada bucle de
+    // duración indeterminada para permitir que el ESP8266 realice ciertas
+    // tareas, como mantener abierta la conexión WiFi
+    delay(100);
+  }
+  
+  Serial.println("¡Conectado a la red con éxito!");  
+  Serial.print("Dirección IP: ");
+  Serial.println(WiFi.localIP());
+
+  // Dejamos el LED encendido para indicar que estamos conectados
+  digitalWrite(LED_PIN, LOW);
 }
 
 // Cambia el pixel entre todos los colores disponibles
