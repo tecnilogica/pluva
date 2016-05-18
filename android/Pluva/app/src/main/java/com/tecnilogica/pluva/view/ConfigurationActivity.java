@@ -45,8 +45,8 @@ public class ConfigurationActivity extends AppCompatActivity implements ApiCall.
             preferences.putString(Preferences.PREF_USER_ID, strUserId);
             preferences.putString(Preferences.PREF_LOCATION, strLocation);
 
-            ApiCall apiCall = new ApiCall(getApplicationContext(), this);
-            apiCall.sendValues();
+            //TODO Call to API method
+
         } else {
             String message;
             if (!Utils.isValidString(strUserId)) {

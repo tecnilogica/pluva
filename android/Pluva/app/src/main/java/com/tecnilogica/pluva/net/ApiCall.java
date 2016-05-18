@@ -67,37 +67,13 @@ public class ApiCall {
     }
 
 
+    //TODO
     public void sendValues () {
-        String userId = preferences.getString(Preferences.PREF_USER_ID);
-        String location = preferences.getString(Preferences.PREF_LOCATION);
-        boolean today = Preferences.PREF_DAY_TODAY.equals(preferences.getString(Preferences.PREF_DAY));
+        //TODO get values from preferences
 
-        RetrofitInterface retrofitInterface = getRetrofitInterface();
-        Callback<String> callback = new Callback<String>() {
-            @Override
-            public void success(String s, Response response) {
-                if (listener != null) {
-                    if (isOk(s)) {
-                        listener.onDataSentOk();
-                    } else {
-                        listener.onDataError();
-                    }
-                }
-            }
+        //TODO Callback
 
-            @Override
-            public void failure(RetrofitError error) {
-                if (listener != null) {
-                    listener.onDataSentError(error);
-                }
-            }
-        };
-
-        if (today) {
-            retrofitInterface.sendValuesForToday(location, userId, callback);
-        } else {
-            retrofitInterface.sendValuesForTomorrow(location, userId, true, callback);
-        }
+        //TODO call retrofit method depending today or tomorrow
     }
 
 

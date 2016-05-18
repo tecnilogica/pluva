@@ -35,7 +35,6 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
     @Bind(R.id.changeUserId)
     TextView changeUserId;
 
-    private ApiCall apiCall;
     private Preferences preferences;
 
     @Override
@@ -44,7 +43,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         setStyles();
-        apiCall = new ApiCall(getApplicationContext(), this);
+
+        //TODO initialize global ApiCall
 
         //Load location and selected day from preferences
         preferences = Preferences.getInstance(getApplicationContext());
@@ -84,7 +84,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
                             if (Utils.isValidString(strLocation)) {
                                 preferences.putString(Preferences.PREF_LOCATION, strLocation);
                                 locationText.setText(strLocation);
-                                apiCall.sendValues();
+
+                                //TODO Call to API mehtod
                             }
                         }
                     }
@@ -100,13 +101,15 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
     public void onClickToday(View v) {
         preferences.putString(Preferences.PREF_DAY, Preferences.PREF_DAY_TODAY);
         setSelectedDay(todayText, tomorrowText);
-        apiCall.sendValues();
+
+        //TODO Call to API mehtod
     }
 
     public void onClickTomorrow(View v) {
         preferences.putString(Preferences.PREF_DAY, Preferences.PREF_DAY_TOMORROW);
         setSelectedDay(tomorrowText, todayText);
-        apiCall.sendValues();
+
+        //TODO Call to API mehtod
     }
 
     public void onClickChangeUserId(View v) {
@@ -141,7 +144,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
                             String strUserId = input.getText().toString();
                             if (Utils.isValidString(strUserId)) {
                                 preferences.putString(Preferences.PREF_USER_ID, strUserId);
-                                apiCall.sendValues();
+
+                                //TODO Call to API method
                             }
                         }
                     }
