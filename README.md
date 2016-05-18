@@ -12,7 +12,7 @@ No te lo pienses mucho, y [saca tu entrada](https://www.picniccode.es/) ya. ¡S�
 
 Para poder saltar directamente a la práctica os vamos a proporcionar un entorno de desarrollo ya configurado con Android Studio, el IDE de Arduino y todas las dependencias de ambos, incluyendo este repositorio. 
 
-Tenéis una guía de instalación completa para [OS X](https://github.com/tecnilogica/pluva/wiki/Software-para-OS-X) y Windows en el Wiki de este mismo repositorio, donde aclaramos qué necesidades de software tenemos.
+Tenéis una guía de instalación completa para [OS X](https://github.com/tecnilogica/pluva/wiki/Software-para-OS-X) y [Windows](https://github.com/tecnilogica/pluva/wiki/Software-para-Windows) en el Wiki de este mismo repositorio, donde aclaramos qué necesidades de software tenemos.
 
 ## Tags
 
