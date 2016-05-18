@@ -53,6 +53,19 @@ public class ApiCall {
                 .create(RetrofitInterface.class);
     }
 
+    private boolean isOk (String strResponse) {
+        if (Utils.isValidString(strResponse)) {
+            String strPattern = "^<forecast>(.*?)</forecast>";
+            Pattern pattern = Pattern.compile(strPattern);
+            Matcher matcher = pattern.matcher(strResponse);
+            if (matcher.find()) {
+                String code = matcher.group(1);
+                return (Utils.isValidString(code) && !code.equals(ERROR_CODE));
+            }
+        }
+        return false;
+    }
+
 
     public void sendValues () {
         String userId = preferences.getString(Preferences.PREF_USER_ID);
@@ -64,16 +77,8 @@ public class ApiCall {
             @Override
             public void success(String s, Response response) {
                 if (listener != null) {
-                    String strPattern = "^<forecast>(.*?)</forecast>";
-                    Pattern pattern = Pattern.compile(strPattern);
-                    Matcher matcher = pattern.matcher(s);
-                    if (matcher.find()) {
-                        String code = matcher.group(1);
-                        if (Utils.isValidString(code) && !code.equals(ERROR_CODE)) {
-                            listener.onDataSentOk();
-                        } else {
-                            listener.onDataError();
-                        }
+                    if (isOk(s)) {
+                        listener.onDataSentOk();
                     } else {
                         listener.onDataError();
                     }
