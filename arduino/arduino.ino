@@ -8,6 +8,10 @@
 const char WiFiSSID[] = "Pluva";
 const char WiFiPSK[] = "rainmaker3000";
 
+// Variables para guardar la MAC
+String clientMac = "";
+uint8_t mac[WL_MAC_ADDR_LENGTH];
+
 // Tiempo en ms entre cada peticion
 const unsigned long sleepTime = 60000; 
 
@@ -92,10 +96,20 @@ void connectWiFi() {
     // tareas, como mantener abierta la conexión WiFi
     delay(100);
   }
+
+  // Guardamos la MAC del ESP en un String
+  WiFi.macAddress(mac);
+  for (int i = 0; i < WL_MAC_ADDR_LENGTH; ++i) {
+    clientMac += String(mac[i], 16);
+  }
   
   Serial.println("¡Conectado a la red con éxito!");  
   Serial.print("Dirección IP: ");
   Serial.println(WiFi.localIP());
+
+  Serial.print("Dirección MAC: ");
+  Serial.println(clientMac);
+
 
   // Dejamos el LED encendido para indicar que estamos conectados
   digitalWrite(LED_PIN, LOW);
