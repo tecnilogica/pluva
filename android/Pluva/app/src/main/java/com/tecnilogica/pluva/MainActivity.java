@@ -16,13 +16,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         Class nextClass;
         if (Preferences.getInstance(getApplicationContext()).isConfigurated()) {
             nextClass = HomeActivity.class;
         } else { //First use, needs to configurate userId and location
             nextClass = ConfigurationActivity.class;
         }
-        startActivity(new Intent(getApplicationContext(), nextClass));
+        */
+
+        //TODO check if configurated in preferences for next class
+
+        startActivity(new Intent(getApplicationContext(), ConfigurationActivity.class));
         finish();
     }
 }

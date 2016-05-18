@@ -46,7 +46,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
 
         //TODO initialize global ApiCall
 
-        //Load location and selected day from preferences
+        //TODO Load location and selected day from preferences
+        /*
         preferences = Preferences.getInstance(getApplicationContext());
         locationText.setText(preferences.getString(Preferences.PREF_LOCATION));
 
@@ -56,6 +57,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
         } else {
             onClickToday(todayText);
         }
+        */
+        onClickToday(todayText);
     }
 
 
@@ -82,7 +85,8 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
                         if (input.getText() != null) {
                             String strLocation = input.getText().toString();
                             if (Utils.isValidString(strLocation)) {
-                                preferences.putString(Preferences.PREF_LOCATION, strLocation);
+                                //TODO save location in preferences
+
                                 locationText.setText(strLocation);
 
                                 //TODO Call to API mehtod
@@ -99,14 +103,16 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
     }
 
     public void onClickToday(View v) {
-        preferences.putString(Preferences.PREF_DAY, Preferences.PREF_DAY_TODAY);
+        //TODO save day in preferences
+
         setSelectedDay(todayText, tomorrowText);
 
         //TODO Call to API mehtod
     }
 
     public void onClickTomorrow(View v) {
-        preferences.putString(Preferences.PREF_DAY, Preferences.PREF_DAY_TOMORROW);
+        //TODO save day in preferences
+
         setSelectedDay(tomorrowText, todayText);
 
         //TODO Call to API mehtod
@@ -123,7 +129,9 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
         container.setOrientation(LinearLayout.VERTICAL);
 
         final TextView current = new TextView(this);
-        current.setText(String.format(" %s: %s", getResources().getString(R.string.currentUserId), preferences.getString(Preferences.PREF_USER_ID)));
+
+        //TODO load user id from preferences
+        //current.setText(String.format(" %s: %s", getResources().getString(R.string.currentUserId), preferences.getString(Preferences.PREF_USER_ID)));
         LinearLayout.LayoutParams currentParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         currentParams.setMargins(horizontalMargin, 0, horizontalMargin, 0);
         current.setLayoutParams(currentParams);
@@ -143,7 +151,7 @@ public class HomeActivity extends AppCompatActivity implements ApiCall.ApiCallLi
                         if (input.getText() != null) {
                             String strUserId = input.getText().toString();
                             if (Utils.isValidString(strUserId)) {
-                                preferences.putString(Preferences.PREF_USER_ID, strUserId);
+                                //TODO save user id in preferences
 
                                 //TODO Call to API method
                             }

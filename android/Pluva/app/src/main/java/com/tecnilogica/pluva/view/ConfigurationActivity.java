@@ -37,13 +37,14 @@ public class ConfigurationActivity extends AppCompatActivity implements ApiCall.
 
 
     public void onClickNext(View v) {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+        /*
         String strUserId = Utils.getEditTextContent(configUserId);
         String strLocation = Utils.getEditTextContent(configLocation);
 
         if (Utils.isValidString(strUserId) && Utils.isValidString(strLocation)) {
-            Preferences preferences = Preferences.getInstance(getApplicationContext());
-            preferences.putString(Preferences.PREF_USER_ID, strUserId);
-            preferences.putString(Preferences.PREF_LOCATION, strLocation);
+            //TODO save user and location in preferences
 
             //TODO Call to API method
 
@@ -65,6 +66,7 @@ public class ConfigurationActivity extends AppCompatActivity implements ApiCall.
                         }
                     }).show();
         }
+        */
     }
 
 

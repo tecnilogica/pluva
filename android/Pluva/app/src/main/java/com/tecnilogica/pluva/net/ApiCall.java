@@ -42,7 +42,8 @@ public class ApiCall {
     public ApiCall (Context context, ApiCallListener listener) {
         super();
         this.listener = listener;
-        preferences = Preferences.getInstance(context);
+
+        //TODO preferences instance
     }
 
     private RetrofitInterface getRetrofitInterface () {

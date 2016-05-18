@@ -35,25 +35,9 @@ public class Preferences {
         return instance;
     }
 
-    public boolean isConfigurated () {
-        return (Utils.isValidString(getString(PREF_LOCATION)) && Utils.isValidString(getString(PREF_USER_ID)));
-    }
+    //TODO isConfigurated method (location and user id)
 
-
-    //Generic methods
-    public void putString (String label, String value) {
-        if (Utils.isValidString(label) && Utils.isValidString(value)) {
-            editor.putString(label, value);
-            editor.commit();
-        }
-    }
-
-    public String getString (String label) {
-        if (Utils.isValidString(label) && preferences.contains(label)) {
-            return preferences.getString(label, null);
-        }
-        return null;
-    }
+    //TODO get and put string methods
 
 
 }
