@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".view.HomeActivity"
+    android:background="@color/background"
+    >
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/logotecnilogica"
+        android:layout_marginTop="30dp"
+        />
+
+
+    <TextView
+        android:id="@+id/location_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/weatherIn"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_below="@+id/image"
+        android:layout_marginTop="40dp"
+        />
+
+
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/colorPrimary"
+        android:textSize="26sp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_below="@+id/location_title"
+        android:paddingTop="2dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+
+        android:clickable="true"
+        android:onClick="onClickChangeLocation"
+        android:textAllCaps="true"
+        android:gravity="center_horizontal"
+        />
+
+
+    <TextView
+        android:id="@+id/location_change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/change"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        android:layout_below="@+id/location_text"
+        android:paddingTop="2dp"
+        android:paddingBottom="10dp"
+
+        android:clickable="true"
+        android:onClick="onClickChangeLocation"
+        />
+
+
+    <TextView
+        android:id="@+id/day_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/weatherFor"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_below="@+id/location_change"
+        android:layout_marginTop="50dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/day_title"
+        android:layout_marginTop="12dp"
+        >
+
+        <TextView
+            android:id="@+id/today_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:background="@drawable/day_selected"
+            android:text="@string/today"
+            android:textColor="@color/background"
+            android:textSize="22sp"
+            android:gravity="center"
+
+            android:clickable="true"
+            android:onClick="onClickToday"
+            />
+
+        <TextView
+            android:id="@+id/tomorrow_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:background="@drawable/day_unselected"
+            android:text="@string/tomorrow"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            android:gravity="center"
+
+            android:clickable="true"
+            android:onClick="onClickTomorrow"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/changeUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/changeUserId"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+
+        android:clickable="true"
+        android:onClick="onClickChangeUserId"
+        />
+
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Pluva</string>
+
+    <string name="welcome">¡Bienvenido a Pluva!</string>
+    <string name="configuration">Solo necesitamos un par de cosas para configurar tu estación meteorológica</string>
+    <string name="userId">Id de usuario</string>
+    <string name="location">Localidad</string>
+
+    <string name="weatherIn">Tiempo en</string>
+    <string name="weatherDefault">Valladolid, España</string>
+    <string name="change">Cambiar</string>
+
+    <string name="weatherFor">Tiempo para</string>
+    <string name="today">HOY</string>
+    <string name="tomorrow">MAÑANA</string>
+
+    <string name="changeUserId">Cambiar ID de usuario</string>
+    <string name="currentUserId">Id actual</string>
+
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error">Error</string>
+
+    <string name="data_error">Se ha producido un error al actualizar tus datos. Intentalo de nuevo más tarde.</string>
+    <string name="error_user">Necesitas indicar tu ID de usuario</string>
+    <string name="error_location">Necesitas indicar la localidad de la que quieres obtener información</string>
+    <string name="error_location_api">Por favor comprueba que la ubicación es correcta.</string>
+
+</resources>
