@@ -24,3 +24,10 @@ El hardware que vamos a utilizar en el taller se compone de
 
 * [SparkFun ESP8266 Thing - Dev Board](https://www.sparkfun.com/products/13711) 
 * [NeoPixel 5050](https://www.adafruit.com/category/168)
+
+## Autores
+
+Lucía Gómez (lucia.gomez@tecnilogica.com)
+Ángel Alonso (angel.alonso@tecnilogica.com
+
+Mayo 2016 - http://www.tecnilogica.com
