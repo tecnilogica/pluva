@@ -27,7 +27,7 @@ El hardware que vamos a utilizar en el taller se compone de
 
 ## Autores
 
-Lucía Gómez (lucia.gomez@tecnilogica.com)
-Ángel Alonso (angel.alonso@tecnilogica.com
+* Lucía Gómez lucia.gomez@tecnilogica.com
+* Ángel Alonso angel.alonso@tecnilogica.com
 
 Mayo 2016 - http://www.tecnilogica.com
